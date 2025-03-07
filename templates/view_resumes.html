@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matched Resumes</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid black; padding: 8px; text-align: left; }
+        th { background-color: #f4f4f4; }
+    </style>
+</head>
+<body>
+
+    <h2>Matched Resumes</h2>
+
+    {% if resumes %}
+    <table>
+        <thead>
+            <tr>
+                <th>Filename</th>
+                <th>Similarity Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for resume in resumes %}
+            <tr>
+                <td>
+                    <a href="{{ url_for('static', filename='uploads/' + resume.filename) }}" target="_blank">
+                        {{ resume.filename }}
+                    </a>
+                </td>
+                <td>{{ resume.similarity_score }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>        
+    </table>
+    {% else %}
+    <p>No resumes found.</p>
+    {% endif %}
+
+    <br>
+    <a href="/">Go Back</a>
+
+</body>
+</html>
